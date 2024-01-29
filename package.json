@@ -1,5 +1,5 @@
 {
-  "name": "backstopjs",
+  "name": "@htmlacademy/backstopjs",
   "version": "6.3.3",
   "description": "BackstopJS: Catch CSS curveballs.",
   "homepage": "https://github.com/garris/BackstopJS#readme",
@@ -60,10 +60,10 @@
   "license": "MIT",
   "main": "core/runner.js",
   "devDependencies": {
-    "assert": "^2.1.0",
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
     "@babel/preset-react": "^7.23.3",
+    "assert": "^2.1.0",
     "babel-loader": "^9.1.3",
     "backstop-twentytwenty": "^1.1.0",
     "eslint": "^8.56.0",
@@ -113,6 +113,7 @@
     "playwright": "^1.40.1",
     "portfinder": "^1.0.32",
     "puppeteer": "^21.6.0",
+    "sharp": "0.33.2",
     "super-simple-web-server": "^1.1.4",
     "temp": "^0.9.4"
   }
