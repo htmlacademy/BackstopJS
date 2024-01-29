@@ -1,6 +1,6 @@
 const resemble = require('@mirzazeyrek/node-resemble-js');
-const sharp = require("sharp");
-const { promises: { rename } } = require("fs");
+const sharp = require('sharp');
+const { promises: { rename } } = require('fs');
 
 const white = { r: 255, g: 255, b: 255 };
 const opaque = { alpha: 1 };
@@ -22,40 +22,45 @@ const resizeByOrigin = async (reference, test) => {
 
   await sharp({
     create: {
-      width: refWidth, height: refHeight,
+      width: refWidth,
+      height: refHeight,
       channels: 4,
-      background,
+      background
     }
   })
-  .composite([
-    {input: await (testImg.extract({
-      top: 0, left: 0, width, height
-    }).toBuffer()), top: 0, left: 0}
-  ])
-  .png()
-  .toFile(test + ".resized");
+    .composite([
+      {
+        input: await (testImg.extract({
+          top: 0, left: 0, width, height
+        }).toBuffer()),
+        top: 0,
+        left: 0
+      }
+    ])
+    .png()
+    .toFile(test + '.resized');
 
-  return await rename(test + ".resized", test);
-}
+  return await rename(test + '.resized', test);
+};
 
 module.exports = function (referencePath, testPath, misMatchThreshold, resembleOutputSettings, requireSameDimensions) {
-  return new Promise(async function (resolve, reject) {
-    await resizeByOrigin(reference, test);
+  return new Promise(function (resolve, reject) {
+    resizeByOrigin(referencePath, testPath).then(() => {
+      const resembleSettings = resembleOutputSettings || {};
+      resemble.outputSettings(resembleSettings);
+      const comparison = resemble(referencePath).compareTo(testPath);
 
-    const resembleSettings = resembleOutputSettings || {};
-    resemble.outputSettings(resembleSettings);
-    const comparison = resemble(referencePath).compareTo(testPath);
-
-    if (resembleSettings.ignoreAntialiasing) {
-      comparison.ignoreAntialiasing();
-    }
-
-    comparison.onComplete(data => {
-      const misMatchPercentage = resembleSettings.usePreciseMatching ? data.rawMisMatchPercentage : data.misMatchPercentage;
-      if ((requireSameDimensions === false || data.isSameDimensions === true) && misMatchPercentage <= misMatchThreshold) {
-        return resolve(data);
+      if (resembleSettings.ignoreAntialiasing) {
+        comparison.ignoreAntialiasing();
       }
-      reject(data);
+
+      comparison.onComplete(data => {
+        const misMatchPercentage = resembleSettings.usePreciseMatching ? data.rawMisMatchPercentage : data.misMatchPercentage;
+        if ((requireSameDimensions === false || data.isSameDimensions === true) && misMatchPercentage <= misMatchThreshold) {
+          return resolve(data);
+        }
+        reject(data);
+      });
     });
   });
 };
