@@ -10,6 +10,7 @@
     "node": ">=16.0.0 <=20.x.x",
     "npm": ">=8.0.0"
   },
+  "types": "types/index.d.ts",
   "scripts": {
     "lint": "eslint \"compare/*.js\" \"compare/src/**/*.js\" \"core/**/*.js\" \"cli/**/*.js\" \"capture/**/*.js\" \"test/**/*.js\"",
     "format": "prettier-eslint --write \"compare/src/**/*.js\"",
@@ -55,6 +56,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/htmlacademy/backstopjs.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "author": "https://github.com/garris/BackstopJS/graphs/contributors",
   "license": "MIT",
