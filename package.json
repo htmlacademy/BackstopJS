@@ -1,5 +1,5 @@
 {
-  "name": "htmlacademy-backstopjs",
+  "name": "@htmlacademy/backstopjs",
   "version": "6.5.0",
   "description": "BackstopJS: Catch CSS curveballs.",
   "homepage": "https://github.com/htmlacademy/BackstopJS#readme",
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/htmlacademy/backstopjs.git"
+    "url": "git+https://github.com/htmlacademy/backstopjs.git"
   },
   "author": "https://github.com/garris/BackstopJS/graphs/contributors",
   "license": "MIT",
