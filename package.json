@@ -1,6 +1,6 @@
 {
   "name": "backstopjs-htmlacademy",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "description": "BackstopJS: Catch CSS curveballs.",
   "homepage": "https://github.com/htmlacademy/BackstopJS#readme",
   "bin": {
